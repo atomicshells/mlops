@@ -27,8 +27,3 @@ def load_data(filename="data.csv"):
         raise FileNotFoundError(f"The file {filename} does not exist in the data folder.")
     
     return pd.read_csv(data_path)
-
-# Example usage
-if __name__ == "__main__":
-    data = load_data()
-    print(data.head())
