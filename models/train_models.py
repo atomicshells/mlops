@@ -5,25 +5,21 @@ from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor, A
 from sklearn.svm import SVR
 from xgboost import XGBRegressor
 import numpy as np
+import pandas as pd
 
-def train_models(X, y):
+def train_models(X, y, random_state=888):
     """
-    Trains multiple regression models on a given dataset and returns trained models along with their training and testing sets.
-
+    Trains multiple regression models and returns them with their training data split.
+    
     Args:
-        X (pd.DataFrame): The input features of the dataset.
-        y (pd.Series): The target variable of the dataset.
-
+        X (pd.DataFrame): Feature data.
+        y (pd.Series): Target variable.
+        random_state (int): Seed for the random number generator.
+    
     Returns:
-        dict: A dictionary containing the trained models and their corresponding training and testing data.
-              Each entry is keyed by model name with a tuple of (model, X_train, X_test, y_train, y_test).
-
-    Note:
-        The random_state is fixed to ensure reproducibility. Adjust the test_size and random_state as needed for different dataset sizes or reproducibility requirements.
+        dict: Dictionary containing trained models and their data splits.
     """
-    random_state = 888
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=random_state)
-
     models = {
         'Ridge Regression': Ridge(random_state=random_state),
         'Lasso Regression': Lasso(random_state=random_state),
@@ -35,9 +31,6 @@ def train_models(X, y):
         'XGBoost': XGBRegressor(random_state=random_state)
     }
 
-    trained_models = {}
     for name, model in models.items():
         model.fit(X_train, y_train)
-        trained_models[name] = (model, X_train, X_test, y_train, y_test)
-
-    return trained_models
+    return models, X_train, X_test, y_train, y_test

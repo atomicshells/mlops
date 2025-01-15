@@ -1,16 +1,20 @@
 from sklearn.metrics import r2_score
 
-def evaluate_model(model, X_test, y_test):
+def evaluate_models(models, X_test, y_test):
     """
-    Evaluates a trained model using the R-squared metric.
-
+    Evaluates each model provided and returns their R2 scores.
+    
     Args:
-        model (model object): A trained model object from scikit-learn or compatible libraries.
-        X_test (pd.DataFrame): The test set features.
-        y_test (pd.Series): The actual target values for the test set.
-
+        models (dict): Dictionary of trained models.
+        X_test (DataFrame): Test features.
+        y_test (Series): Test target variable.
+    
     Returns:
-        float: The R-squared value indicating the model's performance.
+        DataFrame: Model performances.
     """
-    y_pred = model.predict(X_test)
-    return r2_score(y_test, y_pred)
+    results = []
+    for name, model in models.items():
+        y_pred = model.predict(X_test)
+        test_r2 = r2_score(y_test, y_pred)
+        results.append([name, test_r2])
+    return pd.DataFrame(results, columns=['Model', 'Test R2'])
