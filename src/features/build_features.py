@@ -1,28 +1,23 @@
 from sklearn.preprocessing import StandardScaler
 import pandas as pd
 
-def scale_features(df, exclude_columns=None):
+def scale_features(X_train, X_test):
     """
-    Scales numerical features using StandardScaler.
+    Fits a StandardScaler on the training set and applies it to both train and test sets.
 
     Args:
-        df (pd.DataFrame): Input DataFrame with features.
-        exclude_columns (list): List of columns to exclude from scaling (e.g., target column).
+        X_train (pd.DataFrame): Training feature matrix.
+        X_test (pd.DataFrame): Test feature matrix.
 
     Returns:
-        pd.DataFrame: Scaled features.
-        StandardScaler: Fitted scaler object.
+        pd.DataFrame: Scaled X_train.
+        pd.DataFrame: Scaled X_test.
+        StandardScaler: Fitted scaler.
     """
-    if exclude_columns is None:
-        exclude_columns = []
-    
-    features = df.drop(columns=exclude_columns)
     scaler = StandardScaler()
-    scaled_features = scaler.fit_transform(features)
-    
-    scaled_df = pd.DataFrame(scaled_features, columns=features.columns)
-    
-    for col in exclude_columns:
-        scaled_df[col] = df[col].values
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
 
-    return scaled_df, scaler
+    return pd.DataFrame(X_train_scaled, columns=X_train.columns), \
+           pd.DataFrame(X_test_scaled, columns=X_test.columns), \
+           scaler
