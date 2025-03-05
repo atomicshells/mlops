@@ -1,17 +1,34 @@
-from src.data.load_data import load_data
-from src.features.build_features import build_features
-from models.train_model import train_models, evaluate_models
-from models.optimal_parameters import optimize_model
-from models.feature_importance import plot_feature_importance
+from data.load_data import load_data
+from data.preprocess_data import handle_missing_values, remove_duplicates
+from features.build_features import scale_features
+from models.train_models import train_model
+from models.predict import predict
+from models.evaluate_model import evaluate_model
 
 def main():
-    data = load_data('data/data.csv')
-    X, y = build_features(data)
-    models, X_train, X_test, y_train, y_test = train_models(X, y)
-    results = evaluate_models(models, X_test, y_test)
-    print(results)
-    best_model = optimize_model(models['AdaBoost'], {'n_estimators': [50, 100, 150]}, X_train, y_train)
-    plot_feature_importance(best_model, X_train.columns)
+    """
+    Main function to orchestrate the ML pipeline.
+    """
+    df = load_data('data/data.csv')
 
-if __name__ == '__main__':
+    # Preprocess data
+    df = handle_missing_values(df)
+    df = remove_duplicates(df)
+
+    # Set target column — update to actual target column name!
+    target_column = 'Target'  # <== ⚠️ Change this to the actual name in your dataset
+    exclude_columns = [target_column]
+
+    # Feature engineering
+    X, scaler = scale_features(df, exclude_columns=exclude_columns)
+    y = df[target_column]
+
+    # Train model (with train-test split)
+    model, X_test, y_test = train_model(X, y)
+
+    # Predict on test set and evaluate
+    y_pred = predict(model, X_test)
+    evaluate_model(y_test, y_pred)
+
+if __name__ == "__main__":
     main()
