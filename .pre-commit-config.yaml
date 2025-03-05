@@ -1,0 +1,18 @@
+repos:
+-   repo: https://github.com/charliermarsh/ruff-pre-commit
+    rev: v0.4.4
+    hooks:
+    - id: ruff
+      args: ["--fix"]
+
+-   repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+    - id: check-yaml          # Validates YAML files
+    - id: end-of-file-fixer    # Ensures files end with a newline
+    - id: trailing-whitespace  # Removes trailing spaces
+
+-   repo: https://github.com/kynan/nbstripout
+    rev: 0.5.0
+    hooks:
+    - id: nbstripout           # Strips outputs from Jupyter notebooks
