@@ -1,49 +1,25 @@
 import pandas as pd
-from sklearn.preprocessing import StandardScaler
 
-def handle_missing_values(data):
+def handle_missing_values(df):
     """
-    Handles missing values in a DataFrame by filling them with the mean of their respective columns.
+    Fills missing values with the column mean.
 
     Args:
-        data (pd.DataFrame): The DataFrame with missing values to handle.
+        df (pd.DataFrame): Input DataFrame with potential missing values.
 
     Returns:
-        pd.DataFrame: The DataFrame with missing values filled.
+        pd.DataFrame: DataFrame with missing values handled.
     """
-    missing_values_before = data.isnull().sum()
-    print(f"Number of missing values per feature prior to imputation:\n\n{missing_values_before}\n")
+    return df.fillna(df.mean())
 
-    data_filled = data.fillna(data.mean())
-
-    missing_values_after = data_filled.isnull().sum()
-    print(f"Number of missing values per feature after imputation:\n\n{missing_values_after}")
-    
-    return data_filled
-
-def remove_duplicates(data):
+def remove_duplicates(df):
     """
-    Removes duplicate rows from a DataFrame.
+    Removes duplicate rows from the DataFrame.
 
     Args:
-        data (pd.DataFrame): The DataFrame from which to remove duplicates.
+        df (pd.DataFrame): Input DataFrame.
 
     Returns:
-        pd.DataFrame: The DataFrame with duplicates removed.
+        pd.DataFrame: DataFrame without duplicate rows.
     """
-    return data.drop_duplicates()
-
-def scale_features(data):
-    """
-    Scales all numerical features in a DataFrame using StandardScaler.
-
-    Args:
-        data (pd.DataFrame): The DataFrame containing the features to scale.
-
-    Returns:
-        pd.DataFrame: The DataFrame with all numerical features scaled.
-    """
-    scaler = StandardScaler()
-    numerical_cols = data.select_dtypes(include=[np.number]).columns  # Automatically select numerical columns
-    data[numerical_cols] = scaler.fit_transform(data[numerical_cols])
-    return data
+    return df.drop_duplicates()
