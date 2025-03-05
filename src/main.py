@@ -46,4 +46,9 @@ def main():
     print("Making predictions and evaluating...")
     y_pred = predict(model, X_test)
     evaluate_model(y_test, y_pred)
-    print(f"Prediction and evaluation took {time.time() - start
+    print(f"Prediction and evaluation took {time.time() - start:.2f} seconds")
+
+    print("Pipeline finished successfully!")
+
+if __name__ == "__main__":
+    main()
