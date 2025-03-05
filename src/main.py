@@ -5,6 +5,8 @@ from src.models.train_models import train_model
 from src.models.predict import predict
 from src.models.evaluate_model import evaluate_model
 
+print("Pipeline starting...")
+
 def main():
     """
     Main function to orchestrate the ML pipeline.
