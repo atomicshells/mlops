@@ -7,5 +7,6 @@ requires-python = ">=3.12.7"
 dependencies = [
     "dagster>=1.10.1",
     "dagster-webserver>=1.10.1",
+    "loguru>=0.7.3",
     "pandas>=2.2.3",
 ]
