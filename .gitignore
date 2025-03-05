@@ -29,3 +29,14 @@ dagster_storage/
 # OS-specific files
 .DS_Store
 Thumbs.db
+
+__pycache__/
+*.pyc
+tmp*/
+data/asset_outputs/
+runs.db
+index.db
+schedules.db
+*.complete
+*.err
+*.out
