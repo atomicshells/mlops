@@ -1,9 +1,9 @@
-from data.load_data import load_data
-from data.preprocess_data import handle_missing_values, remove_duplicates
-from features.build_features import scale_features
-from models.train_models import train_model
-from models.predict import predict
-from models.evaluate_model import evaluate_model
+from src.data.load_data import load_data
+from src.data.preprocess_data import handle_missing_values, remove_duplicates
+from src.features.build_features import scale_features
+from src.models.train_models import train_model
+from src.models.predict import predict
+from src.models.evaluate_model import evaluate_model
 
 def main():
     """
