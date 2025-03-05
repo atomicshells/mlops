@@ -15,8 +15,8 @@ def main():
     df = handle_missing_values(df)
     df = remove_duplicates(df)
 
-    # Set target column — update to actual target column name!
-    target_column = 'Target'  # <== ⚠️ Change this to the actual name in your dataset
+    # Set target column
+    target_column = 'Global Innovation Score'  
     exclude_columns = [target_column]
 
     # Feature engineering
