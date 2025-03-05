@@ -1,9 +1,10 @@
 import matplotlib.pyplot as plt
+import numpy as np
 
 def plot_feature_importance(model, features):
     """
     Plots feature importance for the given model.
-    
+
     Args:
         model: Trained model with feature_importances_ attribute.
         features (list): List of feature names.
