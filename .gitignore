@@ -20,6 +20,9 @@ logs/
 data/processed/
 data/interim/
 
+data/data.csv
+
+
 # Dagster local runs (if you're using Dagster later)
 dagster_storage/
 
