@@ -1,0 +1,31 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+.venv/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Cache files
+*.cache
+
+# Logs
+logs/
+*.log
+
+# Generated data files (optional — if you want to ignore outputs)
+data/processed/
+data/interim/
+
+# Dagster local runs (if you're using Dagster later)
+dagster_storage/
+
+# VSCode workspace settings (optional, personal choice)
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
