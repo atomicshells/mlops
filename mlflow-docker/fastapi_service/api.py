@@ -6,6 +6,8 @@ import pandas as pd
 
 app = FastAPI()
 
+mlflow.set_tracking_uri("http://mlflow:5000")
+
 # Load latest production model from MLflow Model Registry
 model = mlflow.sklearn.load_model("models:/GlobalInnovationModel/Production")
 

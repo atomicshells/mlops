@@ -1,8 +1,13 @@
-version: "3.8"
-
 services:
   mlflow:
     image: ghcr.io/mlflow/mlflow:v2.12.1
+    container_name: mlflow
+    command: >
+      mlflow server
+      --backend-store-uri sqlite:///mlflow.db
+      --default-artifact-root /mlartifacts
+      --host 0.0.0.0
+      --port 5000
     ports:
       - "5000:5000"
     environment:
@@ -14,9 +19,10 @@ services:
 
   fastapi_service:
     build: ./fastapi_service
-    ports:
-      - "8000:8000"
+    container_name: fastapi_service
     depends_on:
       - mlflow
+    ports:
+      - "8000:8000"
     environment:
       - MLFLOW_TRACKING_URI=http://mlflow:5000
