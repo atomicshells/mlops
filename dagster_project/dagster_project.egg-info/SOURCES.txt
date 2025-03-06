@@ -3,10 +3,16 @@ pyproject.toml
 setup.cfg
 setup.py
 dagster_project/__init__.py
-dagster_project/assets.py
 dagster_project/definitions.py
 dagster_project.egg-info/PKG-INFO
 dagster_project.egg-info/SOURCES.txt
 dagster_project.egg-info/dependency_links.txt
 dagster_project.egg-info/requires.txt
 dagster_project.egg-info/top_level.txt
+dagster_project/assets/features_asset.py
+dagster_project/assets/load_data_asset.py
+dagster_project/assets/predict_asset.py
+dagster_project/assets/preprocess_asset.py
+dagster_project/assets/train_model_asset.py
+dagster_project/io_manager/local_csv_io_manager.py
+dagster_project/jobs/ml_pipeline_job.py
